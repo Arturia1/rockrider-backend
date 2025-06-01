@@ -19,7 +19,6 @@ router.get('/', optionalAuth, async (req, res) => {
       status = 'scheduled',
       featured,
       upcoming = true
-      participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
     } = req.query;
     
     const skip = (page - 1) * limit;
