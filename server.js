@@ -116,13 +116,25 @@ console.log('✅ Rate limiting configurado');
 // ========================================
 
 // CORS
+const allowedOrigins = [
+  'http://localhost:19006',       // Web local
+  'exp://192.168.0.8:19000',      // Expo Go app
+  'https://rockrider.vercel.app', // caso use Vercel para Web
+  'https://rockrider-api.onrender.com' // caso backend faça chamadas internas
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`⛔ Origem não permitida pelo CORS: ${origin}`));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
-console.log('✅ CORS configurado');
 
 // Body parser
 app.use(express.json({ 
