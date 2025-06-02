@@ -118,7 +118,7 @@ console.log('✅ Rate limiting configurado');
 // CORS
 const allowedOrigins = [
   'http://localhost:19006',       // Web local
-  'exp://192.168.0.8:19000',      // Expo Go app
+  'exp://10.100.0.89:19000',      // Expo Go app
   'https://rockrider.vercel.app', // caso use Vercel para Web
   'https://rockrider-api.onrender.com' // caso backend faça chamadas internas
 ];
